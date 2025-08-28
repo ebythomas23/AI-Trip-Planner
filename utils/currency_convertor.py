@@ -1,6 +1,6 @@
 import requests
 
-class CurrencyConvertor:
+class CurrencyConverter:
     def __init__(self, api_key:str) :
         self.base_url = f"https://v6.exchangerate-api.com/v6/{api_key}/latest/"
 
