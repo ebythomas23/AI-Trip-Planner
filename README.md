@@ -86,14 +86,6 @@ The agent is guided by a system prompt (see `prompt_library/prompt.py`) that ins
 - Cost breakdowns and weather details
 - All output in clean Markdown
 
-## How to Run
-
-1. **Install dependencies:**
-	```sh
-	uv pip install requirements.txt
-	# or add individually:
-	uv add <package-name>
-	```
 ## Folder Structure
 
 The project is organized for clarity, modularity, and extensibility:
@@ -141,19 +133,14 @@ AI-Trip-Planner/
 ├── uv.lock
 ```
 
-### Folder/Module Explanations
+## How to Run
 
-- **agent/**: Contains the main agent workflow logic, including the LangGraph-based orchestration.
-- **app_streamlit.py**: The Streamlit UI for interactive travel planning.
-- **config/**: Configuration files, including YAML for LLM and API settings.
-- **main.py**: FastAPI backend that exposes the agent as an API.
-- **my_graph.png**: Visual representation of the agent workflow graph.
-- **notebook/**: Jupyter notebooks for prototyping and experiments.
-- **output/**: Markdown files auto-saved for each generated travel plan.
-- **prompt_library/**: System prompt and prompt engineering logic.
-- **requirements.txt, pyproject.toml, setup.py**: Dependency and packaging management.
-- **tools/**: All modular tools (weather, place search, calculator, currency conversion) exposed to the agent.
-- **utils/**: Utility modules implementing the core logic for each tool.
+1. **Install dependencies:**
+	```sh
+	uv pip install requirements.txt
+	# or add individually:
+	uv add <package-name>
+	```
 2. **Set up environment variables:**
 	- Copy `.env_example` to `.env` and fill in your API keys.
 3. **Start the backend:**
@@ -169,3 +156,6 @@ AI-Trip-Planner/
 ## License
 
 MIT License. See LICENSE file for details.
+
+
+[def]: my_graph.png
