@@ -1,7 +1,10 @@
-from utils.config_loader import load_config
-from pydantic import BaseModel, Field
-from typing import Literal, Optional, Any
 import os
+from dotenv import load_dotenv
+from typing import Literal, Optional, Any
+from pydantic import BaseModel, Field
+from utils.config_loader import load_config
+from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
 
 
 class ConfigLoader:
@@ -15,11 +18,11 @@ class ConfigLoader:
 
 class ModelLoader(BaseModel):
     model_provider: Literal["groq","openai"]="groq"
-    config:Optional[ConfigLoader]= Field(default=None, exclude=True)
+    config: Optional[ConfigLoader]= Field(default=None, exclude=True)
     
 
     def model_post_init(self, __context: Any) -> None:
-          return self.context = ConfigLoader()
+           self.config = ConfigLoader()
 
     class Config:
          arbitrary_types_allowed = True
