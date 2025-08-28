@@ -90,8 +90,70 @@ The agent is guided by a system prompt (see `prompt_library/prompt.py`) that ins
 
 1. **Install dependencies:**
 	```sh
-	pip install -r requirements.txt
+	uv pip install requirements.txt
+	# or add individually:
+	uv add <package-name>
 	```
+## Folder Structure
+
+The project is organized for clarity, modularity, and extensibility:
+
+```
+AI-Trip-Planner/
+├── agent/                  # Agent workflow logic (LangGraph integration)
+│   ├── __init__.py
+│   └── agentic_workflow.py
+├── app_streamlit.py        # Streamlit frontend app
+├── config/                 # Configuration files
+│   ├── __init__.py
+│   └── config.yaml
+├── main.py                 # FastAPI backend entrypoint
+├── my_graph.png            # Workflow graph image
+├── notebook/               # Experiments and research notebooks
+│   └── experiment.ipynb
+├── output/                 # Auto-saved Markdown travel plans
+│   ├── AI_Trip_Planner_*.md
+├── prompt_library/         # Prompt engineering and system prompt
+│   ├── __init__.py
+│   └── prompt.py
+├── requirements.txt        # Project dependencies
+├── pyproject.toml          # Python project metadata
+├── setup.py                # Setup script for packaging
+├── tools/                  # All modular agent tools
+│   ├── __init__.py
+│   ├── currency_conversion_tool.py
+│   ├── expense_calculator_tool.py
+│   ├── place_search_tool.py
+│   └── weather_info_tool.py
+├── utils/                  # Utility modules for tool logic
+│   ├── __init__.py
+│   ├── config_loader.py
+│   ├── currency_convertor.py
+│   ├── expense_calculator.py
+│   ├── model_loader.py
+│   ├── place_info_search.py
+│   ├── save_to_document.py
+│   └── weather_info.py
+├── .env_example            # Example environment variables
+├── .gitignore
+├── .python-version
+├── AI_TRAVEL_PLANNER.egg-info/
+├── uv.lock
+```
+
+### Folder/Module Explanations
+
+- **agent/**: Contains the main agent workflow logic, including the LangGraph-based orchestration.
+- **app_streamlit.py**: The Streamlit UI for interactive travel planning.
+- **config/**: Configuration files, including YAML for LLM and API settings.
+- **main.py**: FastAPI backend that exposes the agent as an API.
+- **my_graph.png**: Visual representation of the agent workflow graph.
+- **notebook/**: Jupyter notebooks for prototyping and experiments.
+- **output/**: Markdown files auto-saved for each generated travel plan.
+- **prompt_library/**: System prompt and prompt engineering logic.
+- **requirements.txt, pyproject.toml, setup.py**: Dependency and packaging management.
+- **tools/**: All modular tools (weather, place search, calculator, currency conversion) exposed to the agent.
+- **utils/**: Utility modules implementing the core logic for each tool.
 2. **Set up environment variables:**
 	- Copy `.env_example` to `.env` and fill in your API keys.
 3. **Start the backend:**
@@ -103,12 +165,6 @@ The agent is guided by a system prompt (see `prompt_library/prompt.py`) that ins
 	streamlit run app_streamlit.py
 	```
 
-## For AI Engineers: Why This Project Stands Out
-
-- **LangGraph for Agentic Orchestration:** Demonstrates advanced use of LangGraph for building stateful, multi-tool agent workflows.
-- **LangChain Tooling:** Shows how to wrap, expose, and compose modular tools for LLM agents.
-- **Real-World APIs:** Integrates multiple real-world APIs (weather, places, currency) in a unified agentic workflow.
-- **Production-Ready Patterns:** Clean separation of concerns, environment management, and extensible tool design.
 
 ## License
 
