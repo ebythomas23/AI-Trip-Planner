@@ -21,33 +21,32 @@ class GraphBuilder():
         self.weather_tools= WeatherInfoTool()
         self.place_search_tools = PlaceSearchTool()
         self.calculator_tools = CalculatorTool()
-        self.currency_conversion_tool =CurrencyConverterTool()
- 
+        self.currency_converter_tools =CurrencyConverterTool()
+
         self.tools.extend([* self.weather_tools.weather_tool_list,
                            * self.place_search_tools.place_search_tool_list,
                            * self.calculator_tools.calculator_tool_list,
                            * self.currency_converter_tools.currency_converter_tool_list  
                            ])
         self.llm_with_tools = self.llm.bind_tools(tools=self.tools)
-        
         self.system_prompt =SYSTEM_PROMPT
         self.graph = None
 
     def agent_function(self, state:MessagesState):
         """MAIN Agent Function"""
-        user_question = state["message"]
-        input_question = [self.system_prompt] +[user_question]
-        response = self.llm_with_tools(input_question)
+        user_question = state["messages"]
+        input_question = [self.system_prompt] +user_question
+        response = self.llm_with_tools.invoke(input_question)
         return {'messages':[response]}
 
     def build_graph(self):
         graph_builder = StateGraph(MessagesState)
         graph_builder.add_node("agent", self.agent_function)
         graph_builder.add_node("tools",ToolNode(tools =self.tools))
-        graph_builder.add_edge(START,"agents")
-        graph_builder.add_conditional_edges("agents", tools_condition)
-        graph_builder.add_edge("tools","agents")
-        graph_builder.add_edge("agents",END)
+        graph_builder.add_edge(START,"agent")
+        graph_builder.add_conditional_edges("agent", tools_condition)
+        graph_builder.add_edge("tools","agent")
+        graph_builder.add_edge("agent",END)
         self.graph = graph_builder.compile()
         return self.graph
 
