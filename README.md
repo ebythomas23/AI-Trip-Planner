@@ -22,6 +22,23 @@ The core of the system is a graph-based agent built with LangGraph. The agent re
 - The workflow starts with user input, passes through the agent node, which can invoke any of the available tools as needed, and iterates until a complete plan is generated.
 - The graph structure enables flexible, multi-step reasoning and tool use.
 
+## Tool Interaction Diagram
+
+Below is the diagram of how the agent interacts with all tools:
+
+```
+User Query
+	|
+	v
+Agent (LangGraph)
+	|---> WeatherInfoTool (weather, forecast)
+	|---> PlaceSearchTool (attractions, restaurants, activities, transport)
+	|---> CalculatorTool (hotel cost, total cost, daily budget)
+	|---> CurrencyConverterTool (currency conversion)
+	v
+Composed Travel Plan (Markdown)
+```
+
 ## Tooling Overview
 
 The agent is equipped with the following modular tools, each implemented as a class and exposed to the agent via LangChain's tool interface:
@@ -60,22 +77,6 @@ The agent is equipped with the following modular tools, each implemented as a cl
 **Exposed Functions:**
   - `convert_currency(amount: float, from_currency: str, to_currency: str) -> float`
 
-## Tool Interaction Diagram
-
-Below is a conceptual diagram of how the agent interacts with all tools:
-
-```
-User Query
-	|
-	v
-Agent (LangGraph)
-	|---> WeatherInfoTool (weather, forecast)
-	|---> PlaceSearchTool (attractions, restaurants, activities, transport)
-	|---> CalculatorTool (hotel cost, total cost, daily budget)
-	|---> CurrencyConverterTool (currency conversion)
-	v
-Composed Travel Plan (Markdown)
-```
 
 ## Prompt Engineering
 
