@@ -25,9 +25,8 @@ class QueryRequest(BaseModel):
 async def query_travel_agent(query:QueryRequest):
     try:
         print(query)
-        graph = GraphBuilder(model_provider="openai")
+        graph = GraphBuilder(model_provider="groq")
         react_app=graph()
-        #react_app = graph.build_graph()
 
         png_graph = react_app.get_graph().draw_mermaid_png()
         with open("my_graph.png", "wb") as f:
@@ -43,7 +42,8 @@ async def query_travel_agent(query:QueryRequest):
             final_output = output["messages"][-1].content  # Last AI response
         else:
             final_output = str(output)
-        
+        # saving output    
+        save_document(response_text=final_output)
         return {"answer": final_output}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
