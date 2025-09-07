@@ -87,6 +87,9 @@ The agent is guided by a system prompt (see `prompt_library/prompt.py`) that ins
 - Cost breakdowns and weather details
 - All output in clean Markdown
 
+## Tracing & Monitoring with LangSmith
+
+This project integrates LangSmith for tracing and monitoring all agentic workflows and tool calls. LangSmith provides detailed visibility into LLM reasoning, tool usage, and execution paths, making it easier to debug, optimize, and understand agent behavior. All interactions and tool invocations are automatically logged for analysis. 
 ## Folder Structure
 
 The project is organized for clarity, modularity, and extensibility:
