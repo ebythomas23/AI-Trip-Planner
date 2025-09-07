@@ -146,7 +146,7 @@ AI-Trip-Planner/
 	- Copy `.env_example` to `.env` and fill in your API keys.
 3. **Start the backend:**
 	```sh
-	uvicorn main:app --reload
+	uvicorn main:app --reload --port 8000
 	```
 4. **Start the frontend:**
 	```sh
